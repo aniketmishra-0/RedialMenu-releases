@@ -1,0 +1,120 @@
+<svg width="660" height="1020" viewBox="0 0 660 1020" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#241a1f"/>
+      <stop offset="22%" stop-color="#181318"/>
+      <stop offset="100%" stop-color="#0e0c10"/>
+    </linearGradient>
+    <linearGradient id="support" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffb02e"/>
+      <stop offset="100%" stop-color="#ff7a1a"/>
+    </linearGradient>
+    <linearGradient id="quit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a1d22"/>
+      <stop offset="100%" stop-color="#2a1418"/>
+    </linearGradient>
+    <linearGradient id="gRedial2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#cfe0ff"/><stop offset="100%" stop-color="#9bb8f0"/></linearGradient>
+    <linearGradient id="gWA2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5bf07a"/><stop offset="100%" stop-color="#16c44b"/></linearGradient>
+    <linearGradient id="gPri2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#28466b"/><stop offset="100%" stop-color="#16263d"/></linearGradient>
+    <linearGradient id="gMac2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff8a4c"/><stop offset="55%" stop-color="#ff5fa2"/><stop offset="100%" stop-color="#c44bff"/></linearGradient>
+    <radialGradient id="dot2" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#7bf59b"/><stop offset="60%" stop-color="#34c759"/><stop offset="100%" stop-color="#1f9e44"/>
+    </radialGradient>
+    <filter id="ds2" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <filter id="dotG2" x="-150%" y="-150%" width="400%" height="400%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#34d058" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+
+  <!-- Panel background -->
+  <rect x="6" y="6" width="648" height="1008" rx="34" fill="url(#pbg)" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.5"/>
+
+  <!-- ===== Header ===== -->
+  <g filter="url(#ds2)">
+    <rect x="44" y="44" width="56" height="56" rx="15" fill="url(#gRedial2)"/>
+  </g>
+  <circle cx="72" cy="72" r="14" fill="none" stroke="#3a5cff" stroke-width="4"/>
+  <path d="M68 65 l9 7 l-9 7Z" fill="#3a5cff"/>
+  <text x="116" y="84" font-size="30" font-weight="800" fill="#ffffff">RedialMenu</text>
+
+  <!-- Support button -->
+  <rect x="430" y="46" width="184" height="54" rx="27" fill="url(#support)"/>
+  <circle cx="470" cy="73" r="11" fill="#ffffff" opacity="0.95"/>
+  <path d="M464 73 q6 7 12 0" stroke="#ff7a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="494" y="82" font-size="22" font-weight="700" fill="#ffffff">Support</text>
+
+  <!-- ===== Search bar ===== -->
+  <rect x="44" y="130" width="572" height="60" rx="16" fill="#1c1922" stroke="#5b8cff" stroke-opacity="0.6" stroke-width="2"/>
+  <circle cx="78" cy="160" r="9" fill="none" stroke="#8a93a3" stroke-width="3"/>
+  <line x1="85" y1="167" x2="93" y2="175" stroke="#8a93a3" stroke-width="3" stroke-linecap="round"/>
+  <text x="108" y="170" font-size="22" fill="#8a93a3">Search apps</text>
+  <rect x="106" y="146" width="2.5" height="28" rx="1" fill="#5b8cff"/>
+
+  <!-- Open Launcher row -->
+  <circle cx="62" cy="226" r="9" fill="none" stroke="#aab2c0" stroke-width="3"/>
+  <line x1="69" y1="233" x2="77" y2="241" stroke="#aab2c0" stroke-width="3" stroke-linecap="round"/>
+  <text x="92" y="235" font-size="23" font-weight="600" fill="#e6e9ef">Open Launcher</text>
+  <rect x="556" y="214" width="60" height="32" rx="9" fill="#2a2730"/>
+  <text x="586" y="236" text-anchor="middle" font-size="18" font-weight="600" fill="#aab2c0">Fn</text>
+
+  <line x1="44" y1="270" x2="616" y2="270" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+
+  <!-- ===== Recent ===== -->
+  <text x="44" y="318" font-size="20" font-weight="700" fill="#aab2c0" letter-spacing="0.5">Recent</text>
+  <rect x="128" y="300" width="40" height="26" rx="8" fill="#2a2730"/>
+  <text x="148" y="319" text-anchor="middle" font-size="16" font-weight="700" fill="#8a93a3">8</text>
+
+  <!-- Recent tiles -->
+  <!-- WhatsApp -->
+  <g filter="url(#ds2)"><rect x="44" y="346" width="92" height="92" rx="22" fill="url(#gWA2)"/></g>
+  <path d="M90 364 a29 29 0 1 0 15 54 l15 4 -4 -15 a29 29 0 0 0 -26 -43Z" fill="#ffffff"/>
+  <path d="M79 377 q-4 2 -3 8 q2 13 15 20 q7 4 11 1 q3 -2 3 -5 l-7 -5 q-2 2 -3 1 q-7 -4 -10 -11 q-1 -2 1 -3 l-3 -7 q-3 -1 -4 1Z" fill="#16c44b"/>
+  <circle cx="128" cy="354" r="9" fill="url(#dot2)" filter="url(#dotG2)"/>
+  <text x="90" y="466" text-anchor="middle" font-size="19" font-weight="600" fill="#e6e9ef">WhatsApp</text>
+
+  <!-- Pritunl -->
+  <g filter="url(#ds2)"><rect x="184" y="346" width="92" height="92" rx="22" fill="url(#gPri2)"/></g>
+  <text x="230" y="416" text-anchor="middle" font-size="52" font-weight="800" fill="#ffffff">p</text>
+  <circle cx="268" cy="354" r="9" fill="url(#dot2)" filter="url(#dotG2)"/>
+  <text x="230" y="466" text-anchor="middle" font-size="19" font-weight="600" fill="#e6e9ef">Pritunl</text>
+
+  <!-- RedialMenu -->
+  <g filter="url(#ds2)"><rect x="324" y="346" width="92" height="92" rx="22" fill="#2a2730"/></g>
+  <circle cx="370" cy="392" r="22" fill="none" stroke="#7d8694" stroke-width="5"/>
+  <path d="M364 381 l15 11 l-15 11Z" fill="#7d8694"/>
+  <circle cx="408" cy="354" r="9" fill="url(#dot2)" filter="url(#dotG2)"/>
+  <text x="370" y="466" text-anchor="middle" font-size="19" font-weight="600" fill="#e6e9ef">RedialMenu</text>
+
+  <!-- Maccy -->
+  <g filter="url(#ds2)"><rect x="464" y="346" width="92" height="92" rx="22" fill="url(#gMac2)"/></g>
+  <path d="M510 366 q17 9 17 28 q0 20 -17 28 q-17 -8 -17 -28 q0 -19 17 -28Z" fill="#ffffff" opacity="0.92"/>
+  <line x1="510" y1="372" x2="510" y2="418" stroke="#ff5fa2" stroke-width="2.5"/>
+  <circle cx="548" cy="354" r="9" fill="url(#dot2)" filter="url(#dotG2)"/>
+  <text x="510" y="466" text-anchor="middle" font-size="19" font-weight="600" fill="#e6e9ef">Maccy</text>
+
+  <!-- ===== Pinned ===== -->
+  <text x="44" y="546" font-size="20" font-weight="700" fill="#aab2c0">Pinned</text>
+  <rect x="44" y="566" width="572" height="118" rx="18" fill="none" stroke="#5a6172" stroke-opacity="0.7" stroke-width="2" stroke-dasharray="9 8"/>
+  <path d="M312 616 v18 M303 625 h18" stroke="#8a93a3" stroke-width="3" stroke-linecap="round"/>
+  <path d="M306 612 l12 0 l-3 8 l3 6 -9 0 3 -6Z" fill="#8a93a3"/>
+  <text x="338" y="632" font-size="21" font-weight="600" fill="#8a93a3">Drag apps here to pin</text>
+
+  <!-- ===== Footer ===== -->
+  <line x1="44" y1="922" x2="616" y2="922" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+  <!-- Settings -->
+  <rect x="44" y="946" width="200" height="56" rx="16" fill="#26232c"/>
+  <circle cx="86" cy="974" r="13" fill="none" stroke="#cfd4dd" stroke-width="3"/>
+  <circle cx="86" cy="974" r="4.5" fill="#cfd4dd"/>
+  <g stroke="#cfd4dd" stroke-width="3" stroke-linecap="round">
+    <line x1="86" y1="958" x2="86" y2="963"/><line x1="86" y1="985" x2="86" y2="990"/>
+    <line x1="70" y1="974" x2="75" y2="974"/><line x1="97" y1="974" x2="102" y2="974"/>
+  </g>
+  <text x="116" y="982" font-size="22" font-weight="600" fill="#e6e9ef">Settings</text>
+  <!-- Quit -->
+  <rect x="416" y="946" width="200" height="56" rx="16" fill="url(#quit)" stroke="#ff4d4d" stroke-opacity="0.35" stroke-width="1.5"/>
+  <circle cx="460" cy="974" r="13" fill="none" stroke="#ff5b5b" stroke-width="3"/>
+  <line x1="460" y1="962" x2="460" y2="974" stroke="#ff5b5b" stroke-width="3" stroke-linecap="round"/>
+  <text x="490" y="982" font-size="22" font-weight="700" fill="#ff5b5b">Quit</text>
+</svg>
