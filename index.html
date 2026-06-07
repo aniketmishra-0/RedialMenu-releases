@@ -305,6 +305,60 @@
   }
   .gk-step h4 { font-size: 16px; font-weight: 700; }
   .gk-step p { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+
+  /* ---------- Animated demo wheel ---------- */
+  .demo-stage { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .demo-wheel {
+    position: relative; width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, rgba(94,92,230,0.18), rgba(255,255,255,0.03) 70%);
+    border: 1px solid var(--border);
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.4), 0 20px 50px rgba(0,0,0,0.45);
+  }
+  .demo-center {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 96px; height: 96px; border-radius: 50%;
+    background: linear-gradient(180deg, rgba(20,24,33,0.96), rgba(13,17,25,0.8));
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; gap: 2px;
+  }
+  .demo-center b { font-size: 12px; font-weight: 800; }
+  .demo-center span { font-size: 8px; color: var(--muted); letter-spacing: 0.04em; }
+  .demo-slot {
+    position: absolute; width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    animation: slotPulse 6s ease-in-out infinite;
+  }
+  .demo-badge {
+    position: absolute; top: -7px; left: -7px; width: 20px; height: 20px;
+    border-radius: 50%; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.55);
+    color: #fff; font-size: 11px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  @keyframes slotPulse {
+    0%, 100% { transform: scale(1); box-shadow: none; border-color: var(--border); }
+    8%       { transform: scale(1.22); box-shadow: 0 0 0 3px rgba(10,132,255,0.55), 0 0 22px rgba(10,132,255,0.6); border-color: var(--accent); }
+    16%      { transform: scale(1); box-shadow: none; border-color: var(--border); }
+  }
+  @media (prefers-reduced-motion: reduce) { .demo-slot { animation: none; } }
+  .demo-caption { color: var(--muted); font-size: 15px; text-align: center; }
+  .demo-caption kbd { margin: 0 2px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq details {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 0 20px;
+  }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 18px 0; font-weight: 600; font-size: 16px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--muted); font-size: 22px; font-weight: 400; transition: transform .2s; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { color: var(--muted); font-size: 15px; padding: 0 0 18px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -315,9 +369,11 @@
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
       <a href="#install">Install</a>
       <a href="#first-launch">First launch</a>
       <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
       <a class="nav-cta" href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">Download</a>
     </div>
   </div>
@@ -397,6 +453,27 @@
           <li><span class="tick">✓</span><span class="txt"><b>Drag to pin &amp; reorder</b> — drag a recent app onto Pinned, then arrange to taste.</span></li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>See it in action</h2>
+      <p>Hold your shortcut and the wheel appears under the cursor. Each app gets a number — tap it to jump straight there, no aiming needed.</p>
+    </div>
+    <div class="demo-stage">
+      <div class="demo-wheel" role="img" aria-label="Radial app wheel with numbered slots that highlight in sequence">
+        <div class="demo-slot" style="left:112px; top:12px;  animation-delay:0s;">🧭<span class="demo-badge">1</span></div>
+        <div class="demo-slot" style="left:199px; top:62px;  animation-delay:1s;">✉️<span class="demo-badge">2</span></div>
+        <div class="demo-slot" style="left:199px; top:162px; animation-delay:2s;">🎵<span class="demo-badge">3</span></div>
+        <div class="demo-slot" style="left:112px; top:212px; animation-delay:3s;">🗓️<span class="demo-badge">4</span></div>
+        <div class="demo-slot" style="left:25px;  top:162px; animation-delay:4s;">📝<span class="demo-badge">5</span></div>
+        <div class="demo-slot" style="left:25px;  top:62px;  animation-delay:5s;">💻<span class="demo-badge">6</span></div>
+        <div class="demo-center"><b>RedialMenu</b><span>RUNNING APPS</span></div>
+      </div>
+      <p class="demo-caption">Hold <kbd>⌃</kbd> <kbd>Space</kbd>, then tap <kbd>1</kbd>–<kbd>9</kbd> — or glide and release.</p>
     </div>
   </div>
 </section>
@@ -549,6 +626,41 @@
     <p style="text-align:center; color:var(--muted); font-size:13px; margin-top:24px; max-width:640px; margin-left:auto; margin-right:auto;">
       Accessibility permission is used solely to switch and launch your apps on this Mac — nothing is sent anywhere.
     </p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Frequently asked questions</h2>
+      <p>Everything you might wonder before downloading.</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Is RedialMenu safe to use?</summary>
+        <p>Yes. RedialMenu collects no data, has no trackers or analytics, and makes no network calls. Everything runs locally on your Mac. The macOS warning on first launch is only because the app isn't signed with a paid Apple Developer ID — not because anything is wrong with it.</p>
+      </details>
+      <details>
+        <summary>Why does macOS say the app “can't be verified” or is “damaged”?</summary>
+        <p>That's Gatekeeper reacting to an unsigned download, not a real problem. Open it via System Settings → Privacy &amp; Security → “Open Anyway”, or run <kbd>xattr -dr com.apple.quarantine /Applications/RedialMenu.app</kbd> in Terminal once. See the “Opening it the first time” section above.</p>
+      </details>
+      <details>
+        <summary>Does it work on Intel Macs?</summary>
+        <p>Yes. RedialMenu ships as a universal build for both Apple Silicon (M-series) and Intel Macs, and requires macOS 15 or later.</p>
+      </details>
+      <details>
+        <summary>What's the default shortcut, and can I change it?</summary>
+        <p>The default trigger is <kbd>⌃</kbd> <kbd>Space</kbd> (Control + Space). You can change it any time in Settings, or use the <kbd>fn</kbd> / 🌐 Globe key. While the wheel is open you can also tap <kbd>1</kbd>–<kbd>9</kbd> to jump straight to a slot.</p>
+      </details>
+      <details>
+        <summary>Why does it need Accessibility permission?</summary>
+        <p>It's used only to detect your global shortcut and bring apps to the front — purely local actions. No keystrokes or data are recorded or sent anywhere.</p>
+      </details>
+      <details>
+        <summary>How do I uninstall it?</summary>
+        <p>Quit RedialMenu from the menu bar, then drag <strong>RedialMenu</strong> from your Applications folder to the Bin. That's it — no leftover background services.</p>
+      </details>
+    </div>
   </div>
 </section>
 
