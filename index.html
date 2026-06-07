@@ -275,6 +275,36 @@
   footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   footer a { color: var(--muted); transition: color .2s; }
   footer a:hover { color: var(--text); }
+
+  /* ---------- First-launch / Gatekeeper dialog mockup ---------- */
+  .gk-layout { display: grid; grid-template-columns: 360px 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 820px) { .gk-layout { grid-template-columns: 1fr; gap: 28px; } }
+  .gk-dialog {
+    max-width: 340px; margin: 0 auto; padding: 26px 24px 22px;
+    background: #1c1c1e; border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    text-align: center;
+  }
+  .gk-icon { font-size: 52px; line-height: 1; margin-bottom: 16px; }
+  .gk-dialog h4 { font-size: 19px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .gk-dialog p { color: #b6bcc6; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+  .gk-btn {
+    display: block; width: 100%; padding: 11px; border-radius: 11px;
+    font-size: 15px; font-weight: 600; margin-top: 9px;
+  }
+  .gk-btn.primary { background: var(--accent); color: #fff; }
+  .gk-btn.secondary { background: rgba(255,255,255,0.10); color: #fff; }
+  .gk-steps { counter-reset: gk; display: flex; flex-direction: column; gap: 16px; }
+  .gk-step { position: relative; padding-left: 46px; }
+  .gk-step::before {
+    counter-increment: gk; content: counter(gk);
+    position: absolute; left: 0; top: 0; width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--accent); color: #fff;
+    font-weight: 700; font-size: 14px;
+  }
+  .gk-step h4 { font-size: 16px; font-weight: 700; }
+  .gk-step p { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -286,6 +316,7 @@
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
+      <a href="#first-launch">First launch</a>
       <a href="#privacy">Privacy</a>
       <a class="nav-cta" href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">Download</a>
     </div>
@@ -444,6 +475,51 @@
     <p style="text-align:center; margin-top:10px;">
       <kbd>xattr -dr com.apple.quarantine /Applications/RedialMenu.app</kbd>
     </p>
+  </div>
+</section>
+
+<section id="first-launch">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Opening it the first time</h2>
+      <p>RedialMenu is safe, but it isn't signed with a paid Apple Developer ID, so macOS asks you to confirm once. You only do this on the first launch.</p>
+    </div>
+    <div class="gk-layout">
+      <div class="gk-dialog" role="img" aria-label="macOS dialog: Open RedialMenu? Apple is not able to verify it is free from malware.">
+        <div class="gk-icon">🔐</div>
+        <h4>Open “RedialMenu”?</h4>
+        <p>Apple is not able to verify that it is free from malware that could harm your Mac or compromise your privacy.</p>
+        <span class="gk-btn primary">Open Anyway</span>
+        <span class="gk-btn secondary">Done</span>
+      </div>
+      <div class="gk-steps">
+        <div class="gk-step">
+          <h4>Double-click to open</h4>
+          <p>Open <strong>RedialMenu</strong> from your Applications folder. macOS shows a warning and blocks it the first time — that's expected for unsigned apps.</p>
+        </div>
+        <div class="gk-step">
+          <h4>Go to Privacy &amp; Security</h4>
+          <p>Open the <strong>Apple menu</strong> () → <strong>System Settings</strong> → <strong>Privacy &amp; Security</strong>, then scroll down to the <strong>Security</strong> section.</p>
+        </div>
+        <div class="gk-step">
+          <h4>Click “Open Anyway”</h4>
+          <p>You'll see “RedialMenu was blocked”. Click <strong>Open Anyway</strong> and authenticate with Touch ID or your password.</p>
+        </div>
+        <div class="gk-step">
+          <h4>Confirm once more</h4>
+          <p>In the dialog shown here, click <strong>Open Anyway</strong> again. RedialMenu launches and won't ask again.</p>
+        </div>
+        <div class="gk-step">
+          <h4>Prefer the Terminal? One command</h4>
+          <p>Skip the prompts entirely by removing the quarantine flag:</p>
+          <p style="margin-top:8px;"><kbd>xattr -dr com.apple.quarantine /Applications/RedialMenu.app</kbd></p>
+        </div>
+        <div class="gk-step">
+          <h4>If it ever says “damaged”</h4>
+          <p>That's the same Gatekeeper block on an unsigned download — the Terminal command above fixes it. RedialMenu is not actually damaged.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
