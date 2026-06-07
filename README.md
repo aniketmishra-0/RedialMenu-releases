@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  <a href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest"><img src="https://img.shields.io/badge/⬇_Download-Latest_DMG-5E5CE6?style=for-the-badge&logo=apple&logoColor=white" alt="Download latest DMG" /></a>
+  <a href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg"><img src="https://img.shields.io/badge/⬇_Download-Latest_DMG-5E5CE6?style=for-the-badge&logo=apple&logoColor=white" alt="Download latest DMG" /></a>
   <a href="https://razorpay.me/@aniket_mishra"><img src="https://img.shields.io/badge/☕_Buy_me_a_coffee-FF7A1A?style=for-the-badge" alt="Buy me a coffee" /></a>
 </p>
 
@@ -31,9 +31,9 @@
 
 ## ⬇️ Download
 
-**[→ Get the latest RedialMenu DMG](https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest)**
+**[⬇️ Download RedialMenu (.dmg)](https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg)**
 
-1. Download `RedialMenu-x.x.dmg` from the **[Releases](https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest)** page.
+1. **[Click here to download `RedialMenu.dmg`](https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg)** (always the latest version).
 2. Open the DMG and **drag RedialMenu into your Applications folder**.
 3. Launch it from Applications — it appears as an icon in your **menu bar**.
 
