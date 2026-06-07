@@ -438,6 +438,10 @@
     </div>
     <p style="text-align:center; color:var(--muted); font-size:13px; margin-top:16px;">
       macOS may warn the app is from an unidentified developer — right-click → <strong>Open</strong> on first launch.
+      If macOS says it's <strong>“damaged”</strong>, that's just Gatekeeper on an unsigned download. Remove the quarantine flag once:
+    </p>
+    <p style="text-align:center; margin-top:10px;">
+      <kbd>xattr -dr com.apple.quarantine /Applications/RedialMenu.app</kbd>
     </p>
   </div>
 </section>
