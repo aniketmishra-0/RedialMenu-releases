@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RedialMenu — A radial app launcher &amp; switcher for macOS</title>
+<meta name="description" content="RedialMenu lives in your menu bar. Press a hotkey and a circular wheel of your apps appears under your cursor. A faster, more visual alternative to Command-Tab." />
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="RedialMenu — radial app launcher for macOS" />
+<meta property="og:description" content="A circular wheel of your apps, right under your cursor. A faster, more visual alternative to Command-Tab." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="docs/hero.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<style>
+  :root {
+    --bg: #07090e;
+    --bg-2: #0d1119;
+    --card: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.09);
+    --text: #eef1f6;
+    --muted: #9aa4b5;
+    --accent: #0a84ff;
+    --accent-2: #5e5ce6;
+    --green: #2ea44f;
+    --radius: 18px;
+    --maxw: 1080px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 700px at 50% -10%, #1a2233 0%, rgba(26,34,51,0) 60%),
+      radial-gradient(900px 600px at 85% 10%, rgba(94,92,230,0.18) 0%, rgba(94,92,230,0) 55%),
+      var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    background: rgba(7, 9, 14, 0.6);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.01em; }
+  .brand .dot {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 4px 14px rgba(10,132,255,0.45);
+  }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--green); color: #fff !important; padding: 9px 16px;
+    border-radius: 10px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 6px 18px rgba(46,164,79,0.35); transition: transform .15s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(46,164,79,0.45); }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  /* ---------- Hero ---------- */
+  header.hero { text-align: center; padding: 84px 0 40px; }
+  .badge-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--muted); font-size: 13px; font-weight: 500; margin-bottom: 26px;
+  }
+  .badge-pill .live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(46,164,79,0.2); }
+
+  h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.05; letter-spacing: -0.03em; font-weight: 800;
+    background: linear-gradient(180deg, #ffffff 0%, #b9c2d4 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .subtitle {
+    max-width: 620px; margin: 22px auto 0; color: var(--muted);
+    font-size: clamp(16px, 2.2vw, 19px);
+  }
+  kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+    border-bottom-width: 2px; border-radius: 6px; padding: 1px 7px; font-size: 0.85em; color: var(--text);
+  }
+
+  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 13px; font-size: 16px; font-weight: 600;
+    transition: transform .15s, box-shadow .25s, background .2s; cursor: pointer;
+  }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 10px 30px rgba(46,164,79,0.4); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(46,164,79,0.5); }
+  .btn-ghost { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,0.07); }
+  .btn small { display:block; font-weight: 400; font-size: 12px; opacity: .8; margin-top: -2px; }
+
+  .meta-row { margin-top: 22px; color: var(--muted); font-size: 13.5px; display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+  .meta-row span { display:inline-flex; align-items:center; gap:6px; }
+
+  /* ---------- Showcase image ---------- */
+  .showcase { margin: 56px auto 0; max-width: 760px; padding: 0 12px; }
+  .showcase .frame {
+    border-radius: 24px; border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    padding: 14px; box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  }
+  .showcase img { width: 100%; height: auto; display: block; border-radius: 14px; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 80px 0; }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; font-weight: 800; }
+  .section-head p { color: var(--muted); margin-top: 12px; font-size: 17px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px; transition: transform .2s, border-color .2s, background .2s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); }
+  .card .ico {
+    width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+    font-size: 22px; margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(10,132,255,0.22), rgba(94,92,230,0.22));
+    border: 1px solid var(--border);
+  }
+  .card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .card p { color: var(--muted); font-size: 14.5px; margin-top: 8px; }
+
+  /* ---------- Steps ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding: 28px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); }
+  .step .num {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    background: rgba(10,132,255,0.14); border: 1px solid rgba(10,132,255,0.3);
+    width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; margin-bottom: 14px;
+  }
+  .step h3 { font-size: 16px; }
+  .step p { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
+
+  /* ---------- Support ---------- */
+  .support {
+    text-align: center; border-radius: 26px; padding: 64px 28px;
+    background:
+      radial-gradient(600px 240px at 50% 0%, rgba(94,92,230,0.25), rgba(94,92,230,0) 70%),
+      linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid var(--border);
+  }
+  .support h2 { font-size: clamp(26px, 4vw, 36px); letter-spacing: -0.02em; }
+  .support p { color: var(--muted); max-width: 520px; margin: 14px auto 28px; }
+  .btn-coffee { background: #ff813f; color: #fff; box-shadow: 0 10px 30px rgba(255,129,63,0.4); }
+  .btn-coffee:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(255,129,63,0.5); }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13.5px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--muted); transition: color .2s; }
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#"><span class="dot"></span> RedialMenu</a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#install">Install</a>
+      <a class="nav-cta" href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">Download</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge-pill"><span class="live"></span> Free for macOS 15+</span>
+    <h1>Your apps in a wheel,<br />right under your cursor.</h1>
+    <p class="subtitle">
+      RedialMenu lives in your menu bar. Press a hotkey and a circular wheel of
+      your apps appears under the pointer. Glide, release, switch — a faster,
+      more visual alternative to <kbd>⌘</kbd> <kbd>Tab</kbd>.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">
+        ⬇ Download
+        <small>Latest DMG · Free</small>
+      </a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+
+    <div class="meta-row">
+      <span>🍎 macOS 15+</span>
+      <span>⚡ Apple Silicon &amp; Intel</span>
+      <span>🦅 Swift 6 · SwiftUI</span>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <div class="frame">
+      <img src="docs/hero.svg" alt="RedialMenu — a circular wheel of running apps arranged around the cursor" />
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Three steps. No aiming.</h2>
+      <p>Reach any app with a quick flick of the wrist — no hunting through the Dock or cycling a long list.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Hold</h3>
+        <p>Press your trigger key — the <kbd>fn</kbd> / 🌐 Globe key, or <kbd>⌥</kbd> <kbd>Space</kbd>.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Move</h3>
+        <p>Glide the mouse toward the app you want. Its slice of the wheel lights up.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Release</h3>
+        <p>Let go and RedialMenu brings that app straight to the front. Instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Built for speed</h2>
+      <p>Everything you need to switch and launch apps without breaking your flow.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">🎯</div>
+        <h3>Radial app wheel</h3>
+        <p>Your apps arranged in a circle around the cursor — pick by hover-and-release, click, or keyboard.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔀</div>
+        <h3>Two wheel modes</h3>
+        <p>Show all running apps for fast switching, or pin favorites to fixed user-defined slots.</p>
+      </div>
+      <div class="card">
+        <div class="ico">⌨️</div>
+        <h3>Flexible trigger</h3>
+        <p>Use the <kbd>fn</kbd> / 🌐 key, <kbd>⌥</kbd> <kbd>Space</kbd>, or set your own shortcut.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🟢</div>
+        <h3>Live indicators</h3>
+        <p>See which apps are already open and how many windows each one has at a glance.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔍</div>
+        <h3>Menu-bar dropdown</h3>
+        <p>Instant search, Recent &amp; Pinned strips, drag-to-pin, and open or quit apps in place.</p>
+      </div>
+      <div class="card">
+        <div class="ico">✨</div>
+        <h3>Glassmorphism UI</h3>
+        <p>A polished panel with spring animations that adapts to Light and Dark mode.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Install in seconds</h2>
+      <p>No App Store needed. Download, drag, done.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Download the DMG</h3>
+        <p>Grab the latest <kbd>RedialMenu.dmg</kbd> from the download button.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Drag to Applications</h3>
+        <p>Open the DMG and drag <strong>RedialMenu</strong> into your Applications folder.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Launch &amp; allow</h3>
+        <p>Open it from Applications and grant <strong>Accessibility</strong> permission when prompted.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a class="btn btn-primary" href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">⬇ Download RedialMenu</a>
+    </div>
+    <p style="text-align:center; color:var(--muted); font-size:13px; margin-top:16px;">
+      macOS may warn the app is from an unidentified developer — right-click → <strong>Open</strong> on first launch.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="support">
+      <h2>Buy me a coffee ☕</h2>
+      <p>RedialMenu is free and made with care. If it makes your day a little smoother, you can support its development.</p>
+      <a class="btn btn-coffee" href="https://razorpay.me/@aniket_mishra">☕ Support the project</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Aniket Mishra. All Rights Reserved.</span>
+    <span>
+      <a href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">Download</a>
+      &nbsp;·&nbsp;
+      <a href="https://razorpay.me/@aniket_mishra">Support</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
