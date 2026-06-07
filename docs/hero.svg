@@ -1,4 +1,4 @@
-<svg width="1024" height="880" viewBox="0 0 1024 880" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+<svg width="800" height="800" viewBox="112 40 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
   <defs>
     <!-- Background gradient -->
     <radialGradient id="bg" cx="50%" cy="42%" r="75%">
@@ -64,9 +64,6 @@
     <linearGradient id="gChrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fbfbfb"/><stop offset="100%" stop-color="#e9edf2"/></linearGradient>
     <linearGradient id="gRedial" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#cfe0ff"/><stop offset="100%" stop-color="#9bb8f0"/></linearGradient>
   </defs>
-
-  <!-- Background -->
-  <rect width="1024" height="880" fill="url(#bg)"/>
 
   <!-- Wheel outer glow -->
   <circle cx="512" cy="440" r="330" fill="url(#accent)" opacity="0.18" filter="url(#wheelGlow)"/>
