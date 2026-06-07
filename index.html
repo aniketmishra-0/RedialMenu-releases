@@ -12,6 +12,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:image" content="docs/wheel.svg" />
 
+<link rel="icon" type="image/png" href="docs/logo.png" />
+<link rel="apple-touch-icon" href="docs/logo.png" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <style>
   :root {
@@ -88,10 +91,9 @@
     height: 64px;
   }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.01em; }
-  .brand .dot {
-    width: 22px; height: 22px; border-radius: 7px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    box-shadow: 0 4px 14px rgba(10,132,255,0.45);
+  .brand img {
+    width: 30px; height: 30px; border-radius: 8px; display: block;
+    box-shadow: 0 4px 14px rgba(10,132,255,0.35);
   }
   .nav-links { display: flex; align-items: center; gap: 26px; }
   .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
@@ -220,6 +222,41 @@
   .step h3 { font-size: 16px; }
   .step p { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
 
+  /* ---------- Split showcase (dropdown panel) ---------- */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 36px; } }
+  .split-media { position: relative; display: flex; justify-content: center; }
+  .split-media::before {
+    content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 90%; height: 90%; border-radius: 40px; z-index: -1;
+    background: radial-gradient(circle, rgba(94,92,230,0.42) 0%, rgba(0,224,209,0.18) 45%, transparent 72%);
+    filter: blur(48px);
+  }
+  .split-media img {
+    height: 460px; max-width: 100%; width: auto; display: block; border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    transition: transform .4s ease;
+  }
+  .split-media img:hover { transform: translateY(-6px) rotate(-0.6deg); }
+  .split-copy .eyebrow {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+    background: rgba(10,132,255,0.12); border: 1px solid rgba(10,132,255,0.3);
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 18px;
+  }
+  .split-copy h2 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.02em; font-weight: 800; line-height: 1.1; }
+  .split-copy > p { color: var(--muted); margin-top: 14px; font-size: 16.5px; }
+  .feature-list { list-style: none; margin-top: 24px; display: grid; gap: 14px; }
+  .feature-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--text); }
+  .feature-list .tick {
+    flex: none; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center;
+    font-size: 12px; color: #fff; margin-top: 1px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  .feature-list li span.txt { color: var(--muted); }
+  .feature-list li b { color: var(--text); font-weight: 600; }
+
   /* ---------- Support ---------- */
   .support {
     text-align: center; border-radius: 26px; padding: 64px 28px;
@@ -244,7 +281,7 @@
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#"><span class="dot"></span> RedialMenu</a>
+    <a class="brand" href="#"><img src="docs/logo.png" alt="RedialMenu app icon" /> RedialMenu</a>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
@@ -306,6 +343,27 @@
         <div class="num">3</div>
         <h3>Release</h3>
         <p>Let go and RedialMenu brings that app straight to the front. Instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dropdown">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-media">
+        <img src="docs/panel.svg" alt="RedialMenu menu-bar dropdown panel with search, recent and pinned apps" />
+      </div>
+      <div class="split-copy">
+        <span class="eyebrow">Menu-bar dropdown</span>
+        <h2>Everything one tap away, right from the menu bar.</h2>
+        <p>Click the menu-bar icon for a polished panel — search, recent and pinned apps, live running state, all without opening the wheel.</p>
+        <ul class="feature-list">
+          <li><span class="tick">✓</span><span class="txt"><b>Instant search</b> — type to filter every installed app, press Return to open the top match.</span></li>
+          <li><span class="tick">✓</span><span class="txt"><b>Recent &amp; Pinned strips</b> — scroll horizontally so lots of apps fit, running ones first.</span></li>
+          <li><span class="tick">✓</span><span class="txt"><b>Live dots &amp; window counts</b> — see what's open and how many windows at a glance.</span></li>
+          <li><span class="tick">✓</span><span class="txt"><b>Drag to pin &amp; reorder</b> — drag a recent app onto Pinned, then arrange to taste.</span></li>
+        </ul>
       </div>
     </div>
   </div>
