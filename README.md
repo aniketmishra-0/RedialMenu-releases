@@ -4,7 +4,7 @@
 
 **A radial app launcher &amp; switcher for macOS**
 
-<img src="docs/hero.svg" alt="RedialMenu — a circular wheel of running apps around the cursor" width="560" />
+<img src="wheel.svg" alt="RedialMenu — a circular wheel of running apps around the cursor" width="560" />
 
 <p>
   <a href="https://github.com/aniketmishra-0/RedialMenu-releases/releases/latest/download/RedialMenu.dmg">
